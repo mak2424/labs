@@ -45,8 +45,7 @@ def z1_1():
     #print('Plot: ', len(graph1), graph1)
     plt.errorbar(range(1000), avg_list, yerr=stand_err, fmt='o-', ecolor='red')
 
-    save(name='lab1', fmt='pdf')
-    save(name='lab1', fmt='png')
+    save(name='lab1-1', fmt='png')
     plt.show()
 
 
@@ -146,6 +145,7 @@ def z1_3():
     exp(1000)
     exp(10000)
 
+
 def z1_4():
     # Аналитическое решение
     red = (9 / 25) * (16 / 24)
@@ -189,7 +189,106 @@ def z1_4():
     exp(1000)
     exp(10000)
 
+
+def z2_1_1():
+
+    def puasson(lam, N):
+        dict = {}
+        for i in range(N):
+            k = 0
+            p = math.exp(-lam)
+            x = random.uniform(0, 1)
+            while x > p:
+                x = x - p
+                k += 1
+                p = p * lam / k
+            dict[k] = p
+
+        sorted_dict = {}
+        for key in sorted(dict):
+            sorted_dict[key] = dict[key]
+        return sorted_dict
+
+    dict1 = puasson(1, 50)
+    dict4 = puasson(4, 50)
+    dict10 = puasson(10, 50)
+
+
+
+    fig = plt.figure()
+    plt.title('Задание 2.1.1')
+    plt.ylabel('P(k)')
+    plt.xlabel('k')
+    plt.plot(list(dict1.keys()), list(dict1.values()))
+    plt.plot(list(dict4.keys()), list(dict4.values()))
+    plt.plot(list(dict10.keys()), list(dict10.values()))
+    save(name='lab2-1', fmt='png')
+    plt.show()
+
+
+def z2_1_2():
+    lam = 4.3
+    k = 0
+    k_list = []
+    params = []
+    dict = {}
+    for i in range(50):
+        k += 1
+        fact = math.factorial(k)
+        p = ((lam ** k)*math.exp(-lam))/fact
+        dict[k] = p
+
+    sorted_dict = {}
+    for key in sorted(dict):
+        sorted_dict[key] = dict[key]
+
+    fig = plt.figure()
+    plt.title('Задание 2.1.2')
+    plt.ylabel('P(k)')
+    plt.xlabel('k')
+    plt.plot(list(sorted_dict.keys()), list(sorted_dict.values()))
+    save(name='lab2-1-2', fmt='png')
+    plt.show()
+
+
+def z2_2():
+
+    def rasp(nu, sigma , N):
+        x_list = []
+        p_list = []
+        dict = {}
+        for i in range(N):
+            x = random.uniform(-5, 5)
+            p = (1/(sigma * math.sqrt(math.pi * 2)))*math.exp(-(((x-nu)**2)/(2*(sigma**2))))
+            x_list.append(x)
+            p_list.append(p)
+            dict[x] = p
+        sorted_dict = {}
+        for key in sorted(dict):
+            sorted_dict[key] = dict[key]
+        return sorted_dict
+
+    xp1 = rasp(0, 0.2, 100)
+    xp2 = rasp(0, 1, 100)
+    xp3 = rasp(0, 5, 100)
+    xp4 = rasp(-2, 0.5, 100)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    plt.title('Задание 2.2')
+    plt.ylabel('P(k)')
+    plt.xlabel('k')
+    ax.plot(list(xp1.keys()), list(xp1.values()))
+    ax.plot(list(xp2.keys()), list(xp2.values()))
+    ax.plot(list(xp3.keys()), list(xp3.values()))
+    ax.plot(list(xp4.keys()), list(xp4.values()))
+    save(name='lab2-2', fmt='png')
+    plt.show()
+
 z1_1()
 z1_2()
 z1_3()
 z1_4()
+z2_1_1()
+z2_1_2()
+z2_2()
