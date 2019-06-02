@@ -108,7 +108,42 @@ def z1_2():
     exp(100)
     exp(500)
     exp(1000)
+    exp(10000)
 
 
-z1_2()
+def z1_3():
+    # Аналитическое решение
+    print(f"""
+        Отрезок АС: [0, 9]
+        Отрезок СB: [5, 20]
+        Пересечение где точка может быть по условию: [5, 9]
+        Длина отрезка: 4
+        Вероятность попадания: {4/20}
+    """)
 
+    # Эксперименты
+    def exp(n):
+        experiment = []
+        for i in range(n):
+            c = random.randint(0, 20)
+
+            if 9 >= c >= 5:
+                experiment.append(1)
+            else:
+                experiment.append(0)
+
+        Mx = experiment.count(1) / len(experiment)
+
+        D = 0
+        for x in experiment:
+            D += (x - Mx)
+        D = D / len(experiment)
+
+        print(f"Exp {n}: M={Mx} D={D}")
+
+    exp(100)
+    exp(500)
+    exp(1000)
+    exp(10000)
+
+z1_3()
