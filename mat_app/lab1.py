@@ -7,7 +7,7 @@ import math
 
 def save(name='', fmt='png'):
     pwd = os.getcwd()
-    iPath = './pictures/{}'.format(fmt)
+    iPath = './pictures/lab1/{}'.format(fmt)
     if not os.path.exists(iPath):
         os.mkdir(iPath)
     os.chdir(iPath)
@@ -284,6 +284,7 @@ def z2_2():
     ax.plot(list(xp4.keys()), list(xp4.values()))
     save(name='lab2-2', fmt='png')
     plt.show()
+
 
 z1_1()
 z1_2()
