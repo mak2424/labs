@@ -7,7 +7,7 @@ import math
 
 def save(name='', fmt='png'):
     pwd = os.getcwd()
-    iPath = './pictures/lab1/{}'.format(fmt)
+    iPath = './lab1/pictures/'
     if not os.path.exists(iPath):
         os.mkdir(iPath)
     os.chdir(iPath)

@@ -1,7 +1,7 @@
 # **Вариант №5.**
 
 ## **Задание 1.1:**
-https://github.com/DReeborn/labs/blob/master/mat_app/pictures/lab1/png/lab1-1.png
+https://github.com/DReeborn/labs/blob/master/mat_app/lab1/pictures/lab1-1.png
 
 **Задание 1.2:**
 ---
@@ -57,12 +57,12 @@ https://github.com/DReeborn/labs/blob/master/mat_app/pictures/lab1/png/lab1-1.pn
     
 **Задание 2.1:**
 ---
-https://github.com/DReeborn/labs/blob/master/mat_app/pictures/lab1/png/lab2-1.png
+https://github.com/DReeborn/labs/blob/master/mat_app/lab1/pictures/lab2-1.png
 
 **Задание 2.1.2:**
 ---
-https://github.com/DReeborn/labs/blob/master/mat_app/pictures/lab1/png/lab2-1-2.png
+https://github.com/DReeborn/labs/blob/master/mat_app/lab1/pictures/lab2-1-2.png
 
 **Задание 2.2:**
 ---
-https://github.com/DReeborn/labs/blob/master/mat_app/pictures/lab1/png/lab2-2.png
+https://github.com/DReeborn/labs/blob/master/mat_app/lab1/pictures/lab2-2.png
