@@ -1,6 +1,6 @@
 # **Вариант №5.**
 
-## **Задание 1.1:**
+## **Задание 1:**
 Аналитическое решение:
 
     Вероятность выбора любого ящика: 0.3333333333333333
@@ -14,11 +14,31 @@
     Exp 100: M=0.74 D=-6.661338147750939e-17
     Exp 500: M=0.708 D=-1.2612133559741777e-16
     Exp 1000: M=0.702 D=4.263256414560601e-17
-![Задание 1.1:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-1(100).png)
+![Задание 1:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-1(100).png)
 
-![Задание 1.1:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-1(500).png)
+![Задание 1:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-1(500).png)
 
-![Задание 1.1:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-1(1000).png)
+![Задание 1:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-1(1000).png)
 
-![Задание 1.1:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-1(box).png)
+![Задание 1:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-1(box).png)
 
+## **Задание 2:**
+Аналитическое решение:
+
+    Вероятность найти донора при четвёртой группе крови: 1
+    Вероятность найти донора при третьей группе крови: 0.546
+    Вероятность найти донора при второй группе крови: 0.546
+    Вероятность найти донора при первой группе крови: 0.337
+
+    Вероятность того, что случайно взятому больному можно перелить кровь случайно взятого донора: 0.10046509200000002
+Экспериментальное:
+    
+    Exp 100: M=0.81 D=-5.329070518200751e-17
+    Exp 500: M=0.708 D=-1.127986593019159e-16
+    Exp 1000: M=0.698 D=-8.881784197001253e-19
+
+![Задание 2:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-2(100).png)
+
+![Задание 2:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-2(500).png)
+
+![Задание 2:](https://github.com/DReeborn/labs/blob/master/mat_app/lab2/pictures/lab2-2(1000).png)
