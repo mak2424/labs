@@ -23,4 +23,4 @@
 2. Почему может случиться так, что более высокая оптимизация замедляет программу? Почему это случилось в случае с нашим кодом?
     - Может происходить излишняя оптимизация кода, например оптимизация функций которых в коде нет.
 3. Определите какой конкретно параметр (или несколько параметров) оптимизации, включаемый командой -O негативно повлиял на время выполнения.
-    Команда: *g++ -O3 -fno-tree-fre  -fno-tree-dce  -fno-tree-copy-prop -fno-forward-propagate -fno-tree-ch -fno-tree-dominator-opts  main.cpp -o base.o* привела к улучшению результата *native  matrix multiply native matmul  time = 59.440000 seconds*
+    - Команда: *g++ -O3 -fno-tree-fre  -fno-tree-dce  -fno-tree-copy-prop -fno-forward-propagate -fno-tree-ch -fno-tree-dominator-opts  main.cpp -o base.o* привела к улучшению результата *native  matrix multiply native matmul  time = 59.440000 seconds*
