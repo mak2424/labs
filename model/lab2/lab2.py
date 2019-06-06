@@ -1,11 +1,23 @@
 import random
 import statistics
 import math
+import matplotlib.pyplot as plt
+import os
 
 MATRIX_LENGTH = 4  # L - количество спинов вдоль одной сторо-ны квадрата
 J = -1  # J - тип взаимодействия, определяющий основные характеристики системы.
-SWAP_COUNT = 10000 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
+SWAP_COUNT = 100 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
 T = 0.0001
+
+
+def save(name='', fmt='png'):
+    pwd = os.getcwd()
+    iPath = './pictures/'
+    if not os.path.exists(iPath):
+        os.mkdir(iPath)
+    os.chdir(iPath)
+    plt.savefig('{}.{}'.format(name, fmt), fmt='png')
+    os.chdir(pwd)
 
 
 def init_matrix(matrix_length=MATRIX_LENGTH):
@@ -117,6 +129,14 @@ def z2(matrix):
             matrix[width][height] = -matrix[width][height]
             e = old_e
         avr_e.append(e)
+
+    fig1 = plt.figure()
+    plt.title(f'Температура: {T}')
+    plt.ylabel('E')
+    plt.xlabel('m')
+    plt.plot(avr_e)
+    save(f"lab2({T})", fmt='png')
+    plt.show()
 
     print(f"Min metro: {e}")
     print(f"Avg metro: {statistics.mean(avr_e)}")
