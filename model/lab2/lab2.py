@@ -3,11 +3,11 @@ import statistics
 import math
 import matplotlib.pyplot as plt
 import os
+import time
 
 MATRIX_LENGTH = 4  # L - количество спинов вдоль одной сторо-ны квадрата
-J = -1  # J - тип взаимодействия, определяющий основные характеристики системы.
-SWAP_COUNT = 100 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
-T = 0.0001
+J = 1  # J - тип взаимодействия, определяющий основные характеристики системы.
+SWAP_COUNT = 10000 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
 
 
 def save(name='', fmt='png'):
@@ -36,7 +36,7 @@ def init_matrix(matrix_length=MATRIX_LENGTH):
             inner_matrix.append(random.choice(values))
         new_matrix.append(inner_matrix)
 
-    print_matrix(new_matrix)
+    # print_matrix(new_matrix)
     return new_matrix
 
 
@@ -106,7 +106,7 @@ def find_min_conf(matrix_length=MATRIX_LENGTH):
     print(f"Min brut: {min_e}")
 
 
-def z2(matrix):
+def z2(matrix, T):
     """
     Расчёт энергии методом метрополиса. 2 Лабораторная работа.
 
@@ -123,42 +123,36 @@ def z2(matrix):
 
         e = calculate_energy(matrix)
 
-        p = math.exp((e-old_e)/T)
+        p = min([1, math.exp(-(e-old_e)/T)])
         p1 = random.random()
-        if p1 < p:
+        if p1 > p:
             matrix[width][height] = -matrix[width][height]
             e = old_e
         avr_e.append(e)
 
-    fig1 = plt.figure()
-    plt.title(f'Температура: {T}')
-    plt.ylabel('E')
-    plt.xlabel('m')
-    plt.plot(avr_e)
-    save(f"lab2({T})", fmt='png')
-    plt.show()
-
+    e_average = statistics.mean(avr_e)
     print(f"Min metro: {e}")
-    print(f"Avg metro: {statistics.mean(avr_e)}")
+    print(f"Avg metro: {e_average}")
+    return e_average
 
 
-T = 5
-print(f"T={T}")
-matrix_S = init_matrix()
-find_min_conf()
-z2(matrix_S)
+temp = [t*0.1 for t in range(1, 50)]
+e = []
+for T in temp:
+    start_time = time.time()
+    print(f"T={T}")
+    matrix_S = init_matrix()
+    # find_min_conf()
+    e.append(z2(matrix_S, T))
+    print("--- %s seconds ---" % (time.time() - start_time))
 
-T = 1
-print(f"T={T}")
-matrix_S = init_matrix()
-find_min_conf()
-z2(matrix_S)
+fig1 = plt.figure()
+plt.title(f'Лаб №2')
+plt.ylabel('E')
+plt.xlabel('T')
+plt.plot(temp, e)
+save(f"lab2", fmt='png')
+plt.show()
 
-
-T = 0.1
-print(f"T={T}")
-matrix_S = init_matrix()
-find_min_conf()
-z2(matrix_S)
 
 
