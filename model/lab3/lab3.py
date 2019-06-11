@@ -6,8 +6,8 @@ import os
 
 MATRIX_LENGTH = 4  # L - количество спинов вдоль одной сторо-ны квадрата
 J = -1  # J - тип взаимодействия, определяющий основные характеристики системы.
-SWAP_COUNT = 10000000 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
-T = 0.1
+SWAP_COUNT = 10000 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
+T = 3
 
 
 def save(name='', fmt='png'):
@@ -78,6 +78,9 @@ def calculate_energy_fast(e_old, width, height, matrix):
     """
     Расчитывает энергию матрицы.
 
+    :param int e_old: Предыдущая энергия
+    :param int width: положение x
+    :param int height: положение y
     :param list[list[int]] matrix: Матрица.
     :return: Возвращает энергию матрицы.
     :rtype: int
@@ -88,7 +91,7 @@ def calculate_energy_fast(e_old, width, height, matrix):
     down = height + 1 if height + 1 < matrix_length else 0
     up = height - 1 if height - 1 > 0 else matrix_length - 1
     s_j = matrix[right][height] + matrix[left][height] + matrix[width][down] + matrix[width][up]
-    return e_old + (2 * -J * matrix[width][height] * s_j)
+    return e_old + (2 * J * matrix[width][height] * s_j)
 
 
 def find_min_conf(matrix_length=MATRIX_LENGTH):
@@ -139,7 +142,6 @@ def z3(matrix):
         matrix[width][height] = -matrix[width][height]
 
         e = calculate_energy_fast(old_e, width, height, matrix)
-        print(f"{e}:{calculate_energy(matrix)}")
 
         p = math.exp((e-old_e)/T)
         p1 = random.random()
