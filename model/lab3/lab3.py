@@ -3,11 +3,14 @@ import statistics
 import math
 import matplotlib.pyplot as plt
 import os
+import time
+import numpy as np
+from matplotlib.animation import FuncAnimation
+import copy
 
-MATRIX_LENGTH = 4  # L - количество спинов вдоль одной сторо-ны квадрата
-J = -1  # J - тип взаимодействия, определяющий основные характеристики системы.
-SWAP_COUNT = 10000 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
-T = 3
+MATRIX_LENGTH = 20  # L - количество спинов вдоль одной сторо-ны квадрата
+J = 1  # J - тип взаимодействия, определяющий основные характеристики системы.
+SWAP_COUNT = 1000 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
 
 
 def save(name='', fmt='png'):
@@ -87,11 +90,11 @@ def calculate_energy_fast(e_old, width, height, matrix):
     """
     matrix_length = len(matrix)
     right = width + 1 if width + 1 < matrix_length else 0
-    left = width - 1 if width - 1 > 0 else matrix_length - 1
+    left = width - 1 if width - 1 >= 0 else matrix_length - 1
     down = height + 1 if height + 1 < matrix_length else 0
-    up = height - 1 if height - 1 > 0 else matrix_length - 1
+    up = height - 1 if height - 1 >= 0 else matrix_length - 1
     s_j = matrix[right][height] + matrix[left][height] + matrix[width][down] + matrix[width][up]
-    return e_old + (2 * J * matrix[width][height] * s_j)
+    return e_old + (2 * -J * matrix[width][height] * s_j)
 
 
 def find_min_conf(matrix_length=MATRIX_LENGTH):
@@ -126,7 +129,7 @@ def find_min_conf(matrix_length=MATRIX_LENGTH):
     print(f"Min brut: {min_e}")
 
 
-def z3(matrix):
+def z3(matrix, T):
     """
     Расчёт энергии методом метрополиса. 2 Лабораторная работа.
 
@@ -134,6 +137,7 @@ def z3(matrix):
     """
     e = calculate_energy(matrix)
     avr_e = []
+    list_states = []
     for i in range(0, SWAP_COUNT):
         old_e = e
 
@@ -143,28 +147,47 @@ def z3(matrix):
 
         e = calculate_energy_fast(old_e, width, height, matrix)
 
-        p = math.exp((e-old_e)/T)
+
+
+        p = min([1, math.exp(-(e-old_e)/T)])
         p1 = random.random()
-        if p1 < p:
+        if p1 > p:
             matrix[width][height] = -matrix[width][height]
             e = old_e
+
         avr_e.append(e)
+        if i % (MATRIX_LENGTH * MATRIX_LENGTH) == 0:
+            list_states.append(copy.deepcopy(matrix))
 
-    fig1 = plt.figure()
-    plt.title(f'Температура: {T}')
-    plt.ylabel('E')
-    plt.xlabel('m')
-    plt.plot(avr_e)
-    save(f"lab2({T})", fmt='png')
-    plt.show()
-
+    e_average = statistics.mean(avr_e)
     print(f"Min metro: {e}")
-    print(f"Avg metro: {statistics.mean(avr_e)}")
+    print(f"Avg metro: {e_average}")
+    return avr_e, list_states
 
 
+
+temp = [t*0.1 for t in range(1, 50)]
+#for T in temp:
+T = 0.1
+start_time = time.time()
 print(f"T={T}")
 matrix_S = init_matrix()
-find_min_conf()
-z3(matrix_S)
+avg, states_list = z3(matrix_S, T)
+print("--- %s seconds ---" % (time.time() - start_time))
 
+
+print(len(states_list))
+i = 1
+for state in states_list:
+    fig, ax = plt.subplots()
+    for height in range(0, MATRIX_LENGTH):
+        for width in range(0, MATRIX_LENGTH):
+            if state[width][height] == -1:
+                ax.broken_barh([(width, 1)], (height, 1), facecolors='tab:blue')
+            else:
+                ax.broken_barh([(width, 1)], (height, 1), facecolors='tab:red')
+    # plt.show()
+    save(f"lab3-{MATRIX_LENGTH}-{T}({i})", fmt='png')
+    i += 1
+    plt.close(fig)
 

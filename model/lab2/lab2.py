@@ -7,7 +7,7 @@ import time
 
 MATRIX_LENGTH = 4  # L - количество спинов вдоль одной сторо-ны квадрата
 J = 1  # J - тип взаимодействия, определяющий основные характеристики системы.
-SWAP_COUNT = 10000 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
+SWAP_COUNT = 1000 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
 
 
 def save(name='', fmt='png'):
