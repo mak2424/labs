@@ -1,6 +1,6 @@
 ## **Лабораторная работа 2:**
 
-![График](https://github.com/DReeborn/labs/blob/master/molde/lab2/pictures/lab2.png)
+![График](https://github.com/DReeborn/labs/blob/master/model/lab2/pictures/lab2.png)
 
 
 1. Как зависит средняя энергия от температуры?
