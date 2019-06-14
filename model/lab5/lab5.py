@@ -10,7 +10,7 @@ import copy
 
 MATRIX_LENGTH = 4  # L - количество спинов вдоль одной сторо-ны квадрата
 J = 1  # J - тип взаимодействия, определяющий основные характеристики системы.
-SWAP_COUNT = 100000 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
+SWAP_COUNT = 100 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
 
 
 def save(name='', fmt='png'):
@@ -129,13 +129,15 @@ def find_min_conf(matrix_length=MATRIX_LENGTH):
     print(f"Min brut: {min_e}")
 
 
-def z4(matrix, T_min, T_max, step):
+def z5(matrix):
     e = calculate_energy(matrix)
 
-    t_e = {}
-    t_e2 = {}
-    t = T_max
-    while t > T_min:
+    e_var = [x*2 for x in range(-MATRIX_LENGTH * MATRIX_LENGTH, (MATRIX_LENGTH * MATRIX_LENGTH) + 1)]
+    g_e = {x: 1 for x in e_var}
+    h_e = {x: 0 for x in e_var}
+    f = 2.7182818284
+
+    while True:
         avr_e = []
         avr_e2 = []
         for i in range(0, SWAP_COUNT):
@@ -147,56 +149,49 @@ def z4(matrix, T_min, T_max, step):
 
             e = calculate_energy_fast(old_e, width, height, matrix)
 
-            if e - old_e > 0:
-                p = min([1, math.exp(-(e - old_e) / t)])
+            if g_e[e] < g_e[old_e]:
+                g_e[e] = g_e[e] * f
+                h_e[e] = h_e[e] + 1
+            else:
+                p = g_e[old_e]/g_e[e]
                 p1 = random.random()
                 if p1 > p:
                     matrix[width][height] = -matrix[width][height]
                     e = old_e
+                    g_e[old_e] = g_e[old_e] * f
+                    h_e[old_e] = h_e[old_e] + 1
+                else:
+                    g_e[e] = g_e[e] * f
+                    h_e[e] = h_e[e] + 1
+
+            # if e - old_e > 0:
+            #     p = min([1, math.exp(-(e - old_e) / t)])
+            #     p1 = random.random()
+            #     if p1 > p:
+            #         matrix[width][height] = -matrix[width][height]
+            #         e = old_e
 
             avr_e.append(e)
             avr_e2.append(e ** 2)
-        t_e[t] = statistics.mean(avr_e)
-        t_e2[t] = statistics.mean(avr_e2)
-        t -= step
 
-    # e_average = statistics.mean(avr_e)
-    # e_average2 = statistics.mean(avr_e2)
-    print(f"Min metro: {e}")
-    # print(f"Avg metro: {e_average}")
-    # print(f"Avg2 metro: {e_average2}")
-    return t_e, t_e2
+        h_avg = statistics.mean(h_e)
+        is_h_plane = True
+        for h in h_e:
+            if h > (h_avg * 0.05):
+                is_h_plane = False
+                break
+
+        if is_h_plane:
+            f = f ** 0.5
+            if f < 1.000000001:
+                break
+            else:
+                h_e = {x: 0 for x in e_var}
+
+    print(f"Min land: {e}")
 
 
 start_time = time.time()
 matrix_S = init_matrix()
-T, T2 = z4(matrix_S, 0.1, 5, 0.1)
+z5(matrix_S)
 print(f"--- {(time.time() - start_time)} seconds ---")
-
-fig1 = plt.figure()
-plt.title(f'Лаб №4 <E>')
-plt.ylabel('E')
-plt.xlabel('T')
-plt.plot(list(T.keys()), list(T.values()))
-save(f"lab2-1", fmt='png')
-plt.show()
-
-fig2 = plt.figure()
-plt.title(f'Лаб №4 <E2>')
-plt.ylabel('E')
-plt.xlabel('T')
-plt.plot(list(T2.keys()), list(T2.values()))
-save(f"lab2-2", fmt='png')
-plt.show()
-
-c_t = {}
-for temp in T:
-    c_t[temp] = (T2[temp] - (T[temp] ** 2))/((MATRIX_LENGTH * MATRIX_LENGTH) * (temp ** 2))
-
-fig3 = plt.figure()
-plt.title(f'Лаб №4 C')
-plt.ylabel('C')
-plt.xlabel('T')
-plt.plot(list(c_t.keys()), list(c_t.values()))
-save(f"lab2-3", fmt='png')
-plt.show()
