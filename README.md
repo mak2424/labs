@@ -6,7 +6,7 @@
 1. [Лабораторная №2](/model/lab2)
 1. [Лабораторная №3](/model/lab3)
 1. [Лабораторная №4](/model/lab4)
-
+1. [Лабораторная №5](/model/lab5)
 
 [Оптимизация программ ЭВМ](https://docs.google.com/spreadsheets/d/1T-QrdMFIarlq8-EIh4YKtKOirJjsx05kk23SX0V3BXM/edit#gid=0)
 ---
