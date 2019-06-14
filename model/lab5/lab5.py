@@ -143,7 +143,7 @@ def z5():
     e_var = [-(x*2) for x in range(-MATRIX_LENGTH * MATRIX_LENGTH, (MATRIX_LENGTH * MATRIX_LENGTH) + 1)]
     g_e = {x: 1 for x in e_var}
     h_e = {x: 0 for x in e_var}
-    f = 2.71828182846
+    f = 1.001
 
     while f > 1.000000001:
         for i in range(0, SWAP_COUNT):
@@ -190,10 +190,13 @@ def z5():
 start_time = time.time()
 # matrix_S = init_matrix()
 g = z5()
+print(g)
+
 string = ""
 for var in g:
-    string += f"{var} {g[var]}\n"
-f = open('g.txt', 'w')
-f.write(string)
-f.close()
+    if g[var] != 1:
+        string += f"{var} {math.log(g[var])}\n"
+file = open('g.txt', 'w')
+file.write(string)
+file.close()
 print(f"--- {(time.time() - start_time)} seconds ---")
