@@ -168,7 +168,6 @@ def z4(matrix, T_min, T_max, step):
     return t_e, t_e2
 
 
-temp = [t*0.1 for t in range(1, 50)]
 start_time = time.time()
 matrix_S = init_matrix()
 T, T2 = z4(matrix_S, 0.1, 5, 0.1)
@@ -182,10 +181,22 @@ plt.plot(list(T.keys()), list(T.values()))
 save(f"lab2-1", fmt='png')
 plt.show()
 
-fig1 = plt.figure()
+fig2 = plt.figure()
 plt.title(f'Лаб №4 <E2>')
 plt.ylabel('E')
 plt.xlabel('T')
 plt.plot(list(T2.keys()), list(T2.values()))
 save(f"lab2-2", fmt='png')
+plt.show()
+
+c_t = {}
+for temp in T:
+    c_t[temp] = (T2[temp] - T[temp])/(MATRIX_LENGTH * MATRIX_LENGTH*(temp ** 2))
+
+fig3 = plt.figure()
+plt.title(f'Лаб №4 C')
+plt.ylabel('C')
+plt.xlabel('T')
+plt.plot(list(c_t.keys()), list(c_t.values()))
+save(f"lab2-3", fmt='png')
 plt.show()
