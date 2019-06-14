@@ -10,7 +10,7 @@ import copy
 
 MATRIX_LENGTH = 4  # L - количество спинов вдоль одной сторо-ны квадрата
 J = 1  # J - тип взаимодействия, определяющий основные характеристики системы.
-SWAP_COUNT = 100 * MATRIX_LENGTH * MATRIX_LENGTH  # m - выбор спина m раз
+SWAP_COUNT = 1000 * MATRIX_LENGTH  # m - выбор спина m раз
 
 
 def save(name='', fmt='png'):
@@ -129,19 +129,25 @@ def find_min_conf(matrix_length=MATRIX_LENGTH):
     print(f"Min brut: {min_e}")
 
 
-def z5(matrix):
+def z5():
+    matrix = []
+    for height in range(0, MATRIX_LENGTH):
+        inner_matrix = []
+        for width in range(0, MATRIX_LENGTH):
+            inner_matrix.append(1)
+        matrix.append(inner_matrix)
+    print_matrix(matrix)
+
     e = calculate_energy(matrix)
 
-    e_var = [x*2 for x in range(-MATRIX_LENGTH * MATRIX_LENGTH, (MATRIX_LENGTH * MATRIX_LENGTH) + 1)]
+    e_var = [-(x*2) for x in range(-MATRIX_LENGTH * MATRIX_LENGTH, (MATRIX_LENGTH * MATRIX_LENGTH) + 1)]
     g_e = {x: 1 for x in e_var}
     h_e = {x: 0 for x in e_var}
-    f = 2.7182818284
+    f = 2.71828182846
 
-    while True:
-        avr_e = []
-        avr_e2 = []
+    while f > 1.000000001:
         for i in range(0, SWAP_COUNT):
-            old_e = e
+            old_e = calculate_energy(matrix)
 
             width = random.randint(0, len(matrix)-1)
             height = random.randint(0, len(matrix)-1)
@@ -149,49 +155,45 @@ def z5(matrix):
 
             e = calculate_energy_fast(old_e, width, height, matrix)
 
-            if g_e[e] < g_e[old_e]:
-                g_e[e] = g_e[e] * f
-                h_e[e] = h_e[e] + 1
-            else:
-                p = g_e[old_e]/g_e[e]
-                p1 = random.random()
-                if p1 > p:
-                    matrix[width][height] = -matrix[width][height]
-                    e = old_e
-                    g_e[old_e] = g_e[old_e] * f
-                    h_e[old_e] = h_e[old_e] + 1
-                else:
-                    g_e[e] = g_e[e] * f
-                    h_e[e] = h_e[e] + 1
+            p = min([1, g_e[old_e]/g_e[e]])
+            p1 = random.random()
+            if p1 > p:
+                matrix[width][height] = -matrix[width][height]
+                e = old_e
+            g_e[e] = g_e[e] * f
+            h_e[e] = h_e[e] + 1
 
-            # if e - old_e > 0:
-            #     p = min([1, math.exp(-(e - old_e) / t)])
-            #     p1 = random.random()
-            #     if p1 > p:
-            #         matrix[width][height] = -matrix[width][height]
-            #         e = old_e
+        sum_e = 0
+        count = 0
+        for e in h_e:
+            if h_e[e] != 0:
+                sum_e += h_e[e]
+                count += 1
 
-            avr_e.append(e)
-            avr_e2.append(e ** 2)
-
-        h_avg = statistics.mean(h_e)
+        h_avg = sum_e/count
         is_h_plane = True
         for h in h_e:
-            if h > (h_avg * 0.05):
+            if h_e[h] < (h_avg * 0.8) and h_e[h] != 0:
                 is_h_plane = False
+                print(f"h_e[{h}]={h_e[h]}  h_avg * factor={h_avg * 0.8}")
                 break
 
         if is_h_plane:
             f = f ** 0.5
-            if f < 1.000000001:
-                break
-            else:
-                h_e = {x: 0 for x in e_var}
+            print(f"f={f}")
+            h_e = {x: 0 for x in e_var}
 
     print(f"Min land: {e}")
+    return g_e
 
 
 start_time = time.time()
-matrix_S = init_matrix()
-z5(matrix_S)
+# matrix_S = init_matrix()
+g = z5()
+string = ""
+for var in g:
+    string += f"{var} {g[var]}\n"
+f = open('g.txt', 'w')
+f.write(string)
+f.close()
 print(f"--- {(time.time() - start_time)} seconds ---")
