@@ -14,6 +14,7 @@
 
 1. [Лабораторная №1](/opt/lab1)
 1. [Лабораторная №2](/opt/lab2)
+1. [Лабораторная №3](/opt/lab3)
 
 [Мат аппарат](https://1drv.ms/f/s!AuyOkCqygmRkhHEWu2VCLnR57wCN)  
 ---
