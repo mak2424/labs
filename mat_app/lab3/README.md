@@ -17,7 +17,7 @@
 
 ## A1:
 
-![a1](mat_app/lab3/pic/a1.jpg)
+![a1](/mat_app/lab3/pic/a1.jpg)
 
 ## A2:
 
