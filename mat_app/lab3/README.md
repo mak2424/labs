@@ -17,46 +17,46 @@
 
 ## A1:
 
-![a1](/pic/a1.jpg)
+![a1](mat_app/lab3/pic/a1.jpg)
 
 ## A2:
 
-![a2](/pic/a2.jpg)
+![a2](mat_app/lab3/pic/a2.jpg)
 
 ## A3:
 
-![a3](/pic/A3.PNG)
+![a3](mat_app/lab3/pic/A3.PNG)
 
 ## A4:
 
-![a4](/pic/A4.PNG)
+![a4](mat_app/lab3/pic/A4.PNG)
 
-![a42](/pic/A4_2.PNG)
+![a42](mat_app/lab3/pic/A4_2.PNG)
 
 ## B1:
 
-![b1](/pic/b1.jpg)
+![b1](mat_app/lab3/pic/b1.jpg)
 
 ## B2:
 
-![b2](/pic/B2.PNG)
+![b2](mat_app/lab3/pic/B2.PNG)
 
-![b22](/pic/B2_2.PNG)
+![b22](mat_app/lab3/pic/B2_2.PNG)
 
-![b23](/pic/B2_3.PNG)
+![b23](mat_app/lab3/pic/B2_3.PNG)
 
 ## B3:
 
-![b3](/pic/B3.PNG)
+![b3](mat_app/lab3/pic/B3.PNG)
 
-![b32](/pic/B3_2.PNG)
+![b32](mat_app/lab3/pic/B3_2.PNG)
 
 ## B4:
 
-![b4](/pic/b4.jpg)
+![b4](mat_app/lab3/pic/b4.jpg)
 
-![b41](/pic/B41.PNG)
+![b41](mat_app/lab3/pic/B41.PNG)
 
-![b42](/pic/B42.PNG)
+![b42](mat_app/lab3/pic/B42.PNG)
 
-![b43](/pic/B43.PNG)
+![b43](mat_app/lab3/pic/B43.PNG)
