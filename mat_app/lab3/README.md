@@ -15,10 +15,48 @@
     
 ### **Задание №3.**
 
-#### **a1)**
-    |0> -> |+>
-    |+> = (|0> + |1>)/sqrt(2)
-    |0> = 1
+## A1:
 
-$$I = \int \rho R^{2} dV$$
+![a1](/pic/a1.jpg)
 
+## A2:
+
+![a2](/pic/a2.jpg)
+
+## A3:
+
+![a3](/pic/A3.PNG)
+
+## A4:
+
+![a4](/pic/A4.PNG)
+
+![a42](/pic/A4_2.PNG)
+
+## B1:
+
+![b1](/pic/b1.jpg)
+
+## B2:
+
+![b2](/pic/B2.PNG)
+
+![b22](/pic/B2_2.PNG)
+
+![b23](/pic/B2_3.PNG)
+
+## B3:
+
+![b3](/pic/B3.PNG)
+
+![b32](/pic/B3_2.PNG)
+
+## B4:
+
+![b4](/pic/b4.jpg)
+
+![b41](/pic/B41.PNG)
+
+![b42](/pic/B42.PNG)
+
+![b43](/pic/B43.PNG)
