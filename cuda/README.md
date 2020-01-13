@@ -42,3 +42,33 @@ CUDA device count: 1
 0: Mаксимальную размерность при конфигурации нитей в блоке = 1024 1024 64
 0: Максимальную размерность при конфигурации блоков в сетке = 2147483647 65535 65535
 ```
+
+## Лабраторная №2:
+
+### **Задание №1**
+
+[Код](lab2_1.cu)
+
+Результат выполнения:
+```
+[fsadaev@jupiter5 cuda]$ nvcc lab2_1.cu --run
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+2 + 7 = 9
+```
+
+### **Задание №2**
+
+[Код](lab2_2.cu)
+
+Результат выполнения:
+```
+[fsadaev@jupiter5 cuda]$ nvcc lab2_2.cu --run
+nvcc warning : The 'compute_20', 'sm_20', and 'sm_21' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+Arrays:
+3 5 6 1 0  5 7 7 4 7 
+6 3 2 2 9  2 5 1 3 0 
+7 5 9 7 3  1 4 0 6 7 
+
+Max:
+7 5 9 7 9  5 7 7 6 7 
+```
